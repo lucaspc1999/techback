@@ -1,0 +1,41 @@
+package br.com.fujideia.iesp.tecback.controller;
+
+import br.com.fujideia.iesp.tecback.model.Genero;
+import br.com.fujideia.iesp.tecback.service.GeneroService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+@RestController
+@RequestMapping("/generos")
+public class GeneroController {
+    @Autowired
+    private GeneroService generoService;
+
+    @PostMapping
+    public Genero salvar(@RequestBody Genero genero){
+        return generoService.salvar(genero);
+    }
+
+    @PutMapping
+    public Genero atualizar(@RequestBody Genero genero){
+        return generoService.atualizar(genero);
+    }
+
+    @GetMapping
+    public List<Genero> listarTodos(){
+        return generoService.listarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Genero buscarPorId(@PathVariable Integer id){
+        return generoService.buscarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void excluirPorId(@PathVariable Integer id){
+        generoService.excluir(id);
+    }
+
+}
